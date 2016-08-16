@@ -46,12 +46,10 @@ var/next_mob_id = 0
 
 /mob/proc/show_message(msg, type, alt, alt_type)
 //Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
-//^^Highly fucking useful commenting there yogi bear^^
-//TODO: Switch these stupid fucking numbers with predefined literals (i.e #define MESSAGE1TYPE 1)
 
 	if(!client)	return
 
-	msg = copytext(msg, 1, MAX_MESSAGE_LEN) // good job einstein
+	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 
 	if (type)
 		if(type & 1 && (disabilities & BLIND || paralysis) )//Vision related
