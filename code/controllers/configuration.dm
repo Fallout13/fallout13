@@ -51,7 +51,6 @@
 	var/allow_holidays = 0				//toggles whether holiday-specific content should be used
 
 	var/respawn = 1
-	var/respawn_FORCE = 1				// Temporary Respawn Fix
 	var/minimum_respawn_time = 2400		// Minimum time before you can respawn
 	var/respawn_timer = 2100			// Default Timer: 3 Minutes (2100/10 = 210 seconds - 30 second window)
 	var/respawn_waves_enabled = 1		// Set to 0 to disable wave spawning
