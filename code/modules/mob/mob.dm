@@ -46,12 +46,10 @@ var/next_mob_id = 0
 
 /mob/proc/show_message(msg, type, alt, alt_type)
 //Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
-//^^Highly fucking useful commenting there yogi bear^^
-//TODO: Switch these stupid fucking numbers with predefined literals (i.e #define MESSAGE1TYPE 1)
 
 	if(!client)	return
 
-	msg = copytext(msg, 1, MAX_MESSAGE_LEN) // good job einstein
+	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 
 	if (type)
 		if(type & 1 && (disabilities & BLIND || paralysis) )//Vision related
@@ -468,9 +466,8 @@ var/list/slot_equipment_priority = list( \
 /mob/verb/abandon_mob()
 	set name = "Respawn"
 	set category = "OOC"
-	if(!config.respawn_FORCE)
-		if (!( abandon_allowed ))
-			return
+	if (!( abandon_allowed ))
+		return
 	if (world.time < config.minimum_respawn_time)
 		usr << "Respawn not available until [config.minimum_respawn_time/10] seconds after server start (Currently [world.time/10] seconds have elapsed)"
 		return
