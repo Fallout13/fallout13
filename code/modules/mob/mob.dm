@@ -44,7 +44,8 @@ var/next_mob_id = 0
 
 	usr.show_message(t, 1)
 
-/mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
+/mob/proc/show_message(msg, type, alt, alt_type)
+//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 
 	if(!client)	return
 
@@ -465,13 +466,18 @@ var/list/slot_equipment_priority = list( \
 /mob/verb/abandon_mob()
 	set name = "Respawn"
 	set category = "OOC"
-
 	if (!( abandon_allowed ))
+		return
+	if (world.time < config.minimum_respawn_time)
+		usr << "Respawn not available until [config.minimum_respawn_time/10] seconds after server start (Currently [world.time/10] seconds have elapsed)"
 		return
 	if ((stat != 2 || !( ticker )))
 		usr << "<span class='boldnotice'>You must be dead to use this!</span>"
 		return
-
+	if (config.respawn_waves_enabled)
+		if (world.time % config.respawn_timer > 300) // Every config.respawn_timer interval give 30(300 decasecs) seconds for respawn
+			usr << "Respawn wave in [(config.respawn_timer - world.time % config.respawn_timer)/10] seconds"
+			return
 	log_game("[usr.name]/[usr.key] used abandon mob.")
 
 	usr << "<span class='boldnotice'>Please roleplay correctly!</span>"
